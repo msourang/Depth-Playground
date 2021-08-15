@@ -19,13 +19,13 @@ input.mouseY.range = input.mouseY.end - input.mouseY.start;
 
 const output = {
     x: {
-      start: -250,
-      end: 250,
+      start: -200,
+      end: 200,
       current: 0
     },
     y: {
-        start: -250,
-        end: 250,
+        start: -200,
+        end: 200,
         current: 0
     },
     zIndex: {
@@ -37,7 +37,7 @@ const output = {
     },
     blur: {
         startingDepth: .1,
-        range: 40
+        range: 10
     }
 }
 
@@ -46,8 +46,8 @@ output.y.range = output.y.end - output.y.start;
 output.scale.range = output.scale.end - output.scale.start;
 
 const mouse = {
-    x: 0,
-    y: 0
+    x: window.innerWidth * 0.5,
+    y: window.innerHeight
 }
 
 const updateInputs = function () {
@@ -108,3 +108,7 @@ function handleResize() {
 }
 
 window.addEventListener('resize', handleResize);
+
+updateInputs();
+updateOutputs();
+updateEachItem();
