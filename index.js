@@ -32,8 +32,8 @@ const output = {
         range: 10000
     },
     scale: {
-        start: 1,
-        end: 0.2
+        start: 1.1,
+        end: 0.1
     },
     blur: {
         startingDepth: .1,
@@ -47,7 +47,23 @@ output.scale.range = output.scale.end - output.scale.start;
 
 const mouse = {
     x: window.innerWidth * 0.5,
-    y: window.innerHeight
+    y: window.innerHeight * 0.5
+}
+
+const action = {
+    type: "follow"
+}
+
+const setFollow = function () {
+    action.type = "follow"
+}
+
+const setOpposite = function () {
+    action.type = "opposite"
+}
+
+const setGoCrazy = function () {
+    action.type = "go crazy"
 }
 
 const updateInputs = function () {
@@ -61,11 +77,30 @@ const updateInputs = function () {
 }
 
 const updateOutputs = function () {
-    //output x
-    output.x.current = output.x.start + (output.x.range * input.mouseX.fraction);
+    switch (action.type) {
+        case "follow":
+            //output x
+            output.x.current = output.x.start + (output.x.range * input.mouseX.fraction);
 
-    //output y
-    output.y.current = output.y.start + (output.y.range * input.mouseY.fraction);
+            //output y
+            output.y.current = output.y.start + (output.y.range * input.mouseY.fraction);
+            break
+        case "opposite":
+            //output x
+            output.x.current = output.x.end - (output.x.range * input.mouseX.fraction);
+
+            //output y
+            output.y.current = output.y.end - (output.y.range * input.mouseY.fraction);
+            break
+        case "go crazy":
+            //output x
+            output.x.current = output.x.start + (output.x.range * input.mouseX.fraction);
+
+            //output y
+            output.y.current = output.y.end - (output.y.range * input.mouseY.fraction);
+            break
+    }
+
 }
 
 
